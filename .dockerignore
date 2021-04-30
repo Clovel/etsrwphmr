@@ -1,0 +1,9 @@
+# Ignore NPM/Yarn packages ----------------------
+node_modules
+
+# Meteor local files ----------------------------
+.meteor/local/
+
+# Logs ------------------------------------------
+npm-debug.log
+yarn-error.log

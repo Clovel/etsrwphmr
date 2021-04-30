@@ -1,0 +1,25 @@
+include:
+  - project: 'loginline-internal/lilops'
+    file: '/pipelines/auto-devops.yml'
+
+build-container:
+  extends: .build-container
+  variables:
+    LILOPS_KANIKO_EXTRA_ARGS: --build-arg MASTER_VERSION=$CI_COMMIT_REF_NAME
+    LILOPS_IMAGE_TAG: dev
+
+deploy-dev:
+  extends: .deploy-dev
+  stage: deploy-dev
+  variables:
+    LILOPS_DOMAIN: vistaswarm.loginline.dev
+    LILOPS_SERVICES: mongodb
+    LILOPS_IMAGE_TAG: dev
+
+tag-container:
+  extends: .build-container
+  stage: tag-container
+  variables:
+    LILOPS_KANIKO_EXTRA_ARGS: --build-arg MASTER_VERSION=$CI_COMMIT_REF_NAME
+  only:
+    - tags
