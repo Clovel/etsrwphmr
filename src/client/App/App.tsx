@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { hot } from 'react-hot-loader';
 
 interface AppProps {
   title: string;
@@ -68,4 +69,4 @@ const Application: React.FC<AppProps> = (props) => {
   );
 };
 
-export default Application;
+export default hot(module)(Application);
